@@ -1,0 +1,125 @@
+/* 
+  TABLE OF CONTENT
+  
+  1. Top most row. Sale Row (red Background)
+  2. Contact bar above navbar with Currency Selector
+  3. Navigation Bar
+*/
+
+.topRowsContainer {
+  width: 98%;
+  margin: 0 auto;
+  max-width: 1900px;
+}
+
+/* ************************* */
+/* SALE ROW */
+/* ************************* */
+.saleRow {
+  font-size: 12px;
+  color: var(--white);
+  background-color: var(--clr-2);
+  padding: 13px 0;
+  position: relative;
+  max-height: 45px;
+  overflow: hidden;
+  transition: all var(--transition) ease;
+}
+
+.navRowTimes {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+/* ************************* */
+/* CURRENCY SELECTOR ROW */
+/* ************************* */
+.currency_row {
+  background-color: var(--clr-3-bg);
+  font-size: 12px;
+  color: var(--clr-3-text);
+}
+
+.currency_row > * > * {
+  flex: 1;
+}
+
+.currency_row div:nth-of-type(2) {
+  text-align: center;
+}
+
+.currency_selector {
+  position: relative;
+}
+
+.dropParent ul {
+  position: absolute;
+  top: 150%;
+  right: 0%;
+  background-color: #f6f6f6;
+  padding: 15px;
+  box-shadow: 0 0 20px rgb(0 0 0 / 20%);
+  width: 110px;
+  z-index: 10;
+}
+
+.dropParent ul li {
+  margin: 0.5rem 0;
+}
+
+.currency:hover,
+.currencyActive {
+  color: var(--clr-1);
+}
+
+/* ************************* */
+/* NAVBAR */
+/* ************************* */
+.navbar > * {
+  flex: 1;
+}
+
+.header_logo_container {
+  position: relative;
+  height: 29px;
+  width: 95px;
+  max-width: 95px;
+}
+
+.nav_link {
+  color: var(--black);
+  margin: 5px 17.5px;
+  display: inline-block;
+  text-transform: none;
+  font-family: var(--font-1);
+  font-weight: 400;
+  font-size: 14px;
+  transition: all var(--transition) ease;
+}
+
+.nav_link:hover,
+.active {
+  color: var(--clr-1);
+}
+
+.navbar_icon {
+  height: 22px;
+  width: 22px;
+  transition: all var(--transition) ease;
+}
+
+.navbar_icon:hover {
+  cursor: pointer;
+  color: var(--clr-1);
+  transform: scale(1.2);
+}
+
+.nav_action {
+  margin: 0 5px;
+}

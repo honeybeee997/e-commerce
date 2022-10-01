@@ -1,0 +1,25 @@
+.heading {
+  text-align: center;
+}
+
+.heading h3::before,
+.heading h3::after {
+  display: block;
+  content: "";
+  height: 2px;
+  width: 60px;
+  background-color: var(--black);
+}
+
+.heading h3 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 34px;
+}
+
+.heading small {
+  font-size: 14px;
+  color: var(--clr-3-text);
+  font-family: var(--font-2);
+  font-weight: 400;
+}

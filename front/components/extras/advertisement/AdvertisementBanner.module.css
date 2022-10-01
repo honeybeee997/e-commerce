@@ -1,0 +1,34 @@
+.advertItem {
+  width: 500px;
+  height: 300px;
+  background-color: var(--black);
+  cursor: pointer;
+}
+
+.advertItem img {
+  opacity: 0.8;
+  -webkit-transition: all 2s ease;
+  -o-transition: all 2s ease;
+  transition: all 2s ease;
+}
+
+.advertItem:hover img {
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+.advertItem small,
+.advertItem h2 {
+  color: var(--white);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.advertItem small {
+  font-size: 16px;
+}
+
+.advertItem h2 {
+  font-size: 45px;
+  font-weight: 600;
+}

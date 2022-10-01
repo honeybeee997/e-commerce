@@ -1,0 +1,17 @@
+.lastSlider {
+  max-height: 320px;
+  overflow-y: hidden;
+}
+.lastSlider img {
+  height: 100%;
+  width: 100%;
+  transition: all var(--transition) ease;
+}
+.lastSlider img:hover {
+  transform: scale(1.2);
+}
+.img_wrap {
+  position: relative;
+  height: 320px;
+  width: 320px !important;
+}

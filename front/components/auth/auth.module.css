@@ -1,0 +1,9 @@
+.modeSwitcher {
+  color: var(--clr-3-text);
+  font-size: 12px;
+}
+
+.modeSwitcher:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

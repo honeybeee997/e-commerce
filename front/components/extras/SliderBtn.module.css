@@ -1,0 +1,27 @@
+.sliderBtn {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--black);
+  border-radius: 50%;
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--transition) ease;
+}
+
+.sliderBtn svg {
+  height: 16px;
+  width: 16px;
+  color: var(--black);
+  transition: all var(--transition) ease;
+}
+
+.sliderBtn:hover {
+  background-color: var(--clr-1);
+  border: 2px solid var(--clr-1);
+}
+.sliderBtn:hover svg {
+  color: var(--white);
+}

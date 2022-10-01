@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+:root {
+  --black: #222222;
+  --white: #fff;
+  --clr-1: #00badb;
+  --clr-1-text: #03dac6;
+  --clr-2: #e91e63;
+  --clr-3-bg: #f6f6f8;
+  --clr-3-text: #878787;
+  --font-1: "Poppins", sans-serif;
+  --font-2: "Libre Baskerville", sans-serif;
+  --transition: 0.3s;
+  --transition-product: 2s;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  width: 98%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.flag::before {
+  display: block;
+  content: "";
+  height: 12px;
+  width: 16px;
+}
+.usa-flag::before {
+  background-image: url(https://cdn.shopify.com/s/files/1/0616/9480/4174/t/2/assets/usd.svg?19041994);
+}
+.nz-flag::before {
+  background-image: url(https://cdn.shopify.com/s/files/1/0616/9480/4174/t/2/assets/nzd.svg?19041994);
+}
+.britain-flag::before {
+  background-image: url(https://cdn.shopify.com/s/files/1/0616/9480/4174/t/2/assets/gbp.svg?19041994);
+}
+.canada-flag::before {
+  background-image: url(https://cdn.shopify.com/s/files/1/0616/9480/4174/t/2/assets/cad.svg?19041994);
+}
+
+.show-go-to-top {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.blog--detail {
+  font-size: 16px;
+}
+
+.blog--detail * {
+  display: block;
+  margin: 20px 0;
+  font-weight: 400;
+  color: var(--clr-3-text);
+}
+
+.blog--detail h1,
+.blog--detail h2,
+.blog--detail h3,
+.blog--detail h4,
+.blog--detail h5,
+.blog--detail h6,
+.blog--detail strong,
+.blog--detail b {
+  color: var(--black);
+  font-weight: 600;
+}
+
+.btn-override {
+  background: #1976d2 !important;
+}
+
+.btn-override-red {
+  background: #c62828 !important;
+  color: white;
+}
+
+.btn-override-green {
+  background: rgb(102, 187, 106) !important;
+}

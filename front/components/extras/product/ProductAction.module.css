@@ -1,0 +1,40 @@
+.action {
+  height: 35px;
+  width: 130px;
+  overflow: hidden;
+  display: block;
+  border-radius: 45px;
+  margin: 0.5rem 0;
+  background-color: var(--white);
+  transition: all var(--transition) ease;
+}
+
+.actionName,
+.actionIcon {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--black);
+  transition: all var(--transition) ease;
+}
+
+.actionName {
+  font-size: 14px;
+  font-weight: 400;
+}
+.actionIcon {
+  font-size: 20px;
+}
+
+.action:hover {
+  background-color: var(--black);
+}
+
+.action:hover span:first-of-type,
+.action:hover span:last-of-type {
+  transform: translateY(-100%);
+  color: var(--white);
+}

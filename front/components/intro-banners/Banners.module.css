@@ -1,0 +1,58 @@
+.bannerSlide {
+  position: relative;
+  width: 100%;
+  height: 700px;
+  background-color: var(--black);
+}
+
+.bannerSlide h3,
+.bannerSlide h2 {
+  color: var(--white);
+}
+
+.bannerSlide h3 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.bannerSlide h2 {
+  font-size: 55px;
+  font-weight: 600;
+}
+
+.bannerSlide img {
+  opacity: 0.5;
+}
+
+.miniBanner {
+  height: 220px;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.miniBanner::before {
+  display: block;
+  content: "";
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.miniBanner h2 {
+  color: var(--white);
+  font-size: 40px;
+  font-weight: 600;
+  position: relative;
+  z-index: 3;
+}

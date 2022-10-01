@@ -1,0 +1,20 @@
+.productBadge {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  z-index: 2;
+  top: 5%;
+  right: 5%;
+  color: var(--white);
+  box-shadow: 0 0 5px #22222280;
+}
+
+.onSale {
+  background-color: var(--clr-2);
+  font-size: 12px;
+}
+
+.new {
+  background-color: var(--clr-1);
+}
