@@ -1,5 +1,6 @@
 const express = require("express");
-
+const adminRoutes = require("./routes/adminRoutes");
+const errorHandler = require("./controllers/errorController");
 const app = express();
 
 app.use(express.json());
@@ -9,12 +10,8 @@ app.use((req, _, next) => {
   next();
 });
 
-app.get("/", (req, res) => {
-  res.status(200).json({
-    status: "success",
-    data: "Express app successful",
-    time: req.reqTime,
-  });
-});
+app.use("/api/admin", adminRoutes);
+
+app.use(errorHandler);
 
 module.exports = app;
