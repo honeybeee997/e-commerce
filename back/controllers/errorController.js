@@ -9,6 +9,7 @@ const sendDevError = (err, _, res) => {
   });
 };
 const sendProdError = (err, _, res) => {
+  // Expected Errors
   if (err.isOperational) {
     return res.status(err.statusCode).json({
       error: {
@@ -18,9 +19,18 @@ const sendProdError = (err, _, res) => {
     });
   }
 
-  return res.status(err.status).json({
+  // Unexpected Errors
+  let message = "something Went wrong";
+
+  // Duplicate field in mongodb
+  if (err.code === 11000) {
+    const duplicate = Object.values(err.keyValue)[0];
+    message = `${duplicate} already exists. Please use another value`;
+  }
+
+  return res.status(err.statusCode).json({
     status: err.status,
-    message: "something Went wrong",
+    message,
   });
 };
 

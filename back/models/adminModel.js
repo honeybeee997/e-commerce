@@ -10,6 +10,7 @@ const adminSchema = new mongoose.Schema(
     email: {
       type: String,
       required: [true, "Admin email can't be empty"],
+      unique: true,
     },
     role: {
       type: String,
@@ -35,7 +36,12 @@ const adminSchema = new mongoose.Schema(
   { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } }
 );
 
-const adminModel = mongoose.model("Admin", adminSchema);
+adminSchema.methods.isPasswordCorrect = async function (
+  candidatePassword,
+  userPassword
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
+};
 
 adminSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
@@ -45,11 +51,10 @@ adminSchema.pre("save", async function (next) {
   next();
 });
 
-adminSchema.methods.correctPassword = async function (
-  candidatePassword,
-  userPassword
-) {
-  return await bcrypt.compare(candidatePassword, userPassword);
-};
+adminSchema.pre(/^find/, function (next) {
+  this.select("-__v -updatedAt");
+  next();
+});
 
+const adminModel = mongoose.model("Admin", adminSchema);
 module.exports = adminModel;
