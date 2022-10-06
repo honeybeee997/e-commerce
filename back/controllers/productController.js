@@ -69,13 +69,6 @@ exports.editProduct = catchAsync(async (req, res, next) => {
     );
   }
 
-  product.name = name;
-  product.price = price;
-  product.description = description;
-  product.sizes = sizes;
-
-  const updatedProduct = await product.save();
-
   res.status(200).json({
     status: "success",
     data: {

@@ -2,6 +2,7 @@ const express = require("express");
 
 const adminRoutes = require("./routes/adminRoutes");
 const productRoutes = require("./routes/productRoutes");
+const blogRoutes = require("./routes/blogRoutes");
 
 const errorHandler = require("./controllers/errorController");
 
@@ -20,6 +21,7 @@ app.use((req, _, next) => {
 // --- Routes
 app.use("/api/admin", adminRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/blogs", blogRoutes);
 
 // --- Undefined Routes
 app.use("*", (_, res) => {

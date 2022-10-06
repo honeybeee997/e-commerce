@@ -1,8 +1,6 @@
 const router = require("express").Router();
-const validate = require("../utils/validator");
-const checkResults = require("../utils/validateResult");
-const authenticateToken = require("../utils/authenticate");
-const permissions = require("../utils/permissions");
+const { validate } = require("../utils/validator");
+const { authenticateToken, permissions } = require("../utils/authentication");
 const admin = require("../models/adminModel");
 const productController = require("../controllers/productController");
 
@@ -15,7 +13,6 @@ router.get("/", productController.getAllProdcuts);
 router.post(
   "/new",
   validate("product"), //---> Validating Incoming Data
-  checkResults, //---> Sending Response if incorrect data
   productController.createProduct
 );
 
@@ -23,7 +20,6 @@ router.patch(
   "/edit/:slug",
   permissions("manager", "admin"), //---> Giving permission to just manager and admin
   validate("product"), //---> Validating Incoming Data
-  checkResults, //---> Sending Response if incorrect data
   productController.editProduct
 );
 

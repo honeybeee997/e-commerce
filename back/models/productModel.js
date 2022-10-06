@@ -31,10 +31,6 @@ const productSchema = new mongoose.Schema(
       default: 100,
     },
     images: [String],
-    inStock: {
-      type: Boolean,
-      default: true,
-    },
     onSalePrice: Number,
     slug: String,
     serialNo: Number,

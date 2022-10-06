@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const catchAsync = require("./catchAsync");
 const AppError = require("./error");
 
-module.exports = (model) => {
+exports.authenticateToken = (model) => {
   return catchAsync(async (req, _, next) => {
     let token;
 
@@ -39,4 +39,14 @@ module.exports = (model) => {
 
     next();
   });
+};
+
+exports.permissions = (...permitted) => {
+  return (req, _, next) => {
+    if (!permitted.includes(req.user.role)) {
+      return next(new AppError("You are not allowed for this action", 401));
+    }
+
+    next();
+  };
 };
