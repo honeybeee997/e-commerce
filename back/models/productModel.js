@@ -34,6 +34,10 @@ const productSchema = new mongoose.Schema(
     onSalePrice: Number,
     slug: String,
     serialNo: Number,
+    parentCollection: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "Collection",
+    },
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );

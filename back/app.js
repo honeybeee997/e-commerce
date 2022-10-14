@@ -3,6 +3,7 @@ const express = require("express");
 const adminRoutes = require("./routes/adminRoutes");
 const productRoutes = require("./routes/productRoutes");
 const blogRoutes = require("./routes/blogRoutes");
+const collectionRoutes = require("./routes/collectionRoutes");
 
 const errorHandler = require("./controllers/errorController");
 
@@ -22,6 +23,7 @@ app.use((req, _, next) => {
 app.use("/api/admin", adminRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/blogs", blogRoutes);
+app.use("/api/collections", collectionRoutes);
 
 // --- Undefined Routes
 app.use("*", (_, res) => {

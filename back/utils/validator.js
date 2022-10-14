@@ -95,6 +95,21 @@ exports.validator = (method) => {
           .withMessage("Blog content must be at least 10 characters"),
       ];
     }
+    case "collection": {
+      return [
+        body("name")
+          .isLength({ min: 3 })
+          .withMessage("Collection name must be at least 3 characters"),
+        body("creator").exists().withMessage("Collection must have a creator"),
+      ];
+    }
+    case "collectionUpdate": {
+      return [
+        body("name")
+          .isLength({ min: 3 })
+          .withMessage("Collection name must be at least 3 characters"),
+      ];
+    }
   }
 };
 

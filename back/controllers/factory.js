@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const admin = require("../models/adminModel");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/error");
 
@@ -14,9 +15,7 @@ const cleanBody = (allowedFields, req) => {
 
 const checkMongooseId = (id, next) => {
   if (!mongoose.isValidObjectId(id)) {
-    return next(
-      new AppError("Entered Id is invalid. Please re-check the URL", 400)
-    );
+    return next(new AppError("Id is invalid. Please re-check", 400));
   }
   return true;
 };
@@ -25,6 +24,10 @@ exports.getOne = (model, identifier) =>
   catchAsync(async (req, res, next) => {
     let filter;
     if (identifier === "blogs") filter = { slug: req.params.slug };
+    if (identifier === "collections") {
+      if (!checkMongooseId(req.params.id, next)) return;
+      filter = { _id: req.params.id };
+    }
 
     const item = await model.findOne(filter);
 
@@ -52,7 +55,26 @@ exports.createOne = (model, identifier) =>
   catchAsync(async (req, res, next) => {
     let allowed = [];
 
+    // Blogs Block
     if (identifier === "blogs") allowed = ["title", "text"];
+
+    // Collections Block
+    if (identifier === "collections") {
+      if (!checkMongooseId(req.body.creator, next)) return;
+
+      // Checking if the use exist
+      const user = await admin.findById(req.body.creator);
+      if (!user) {
+        return next(
+          new AppError(
+            "User with this id does not exist. Please re-check the id",
+            401
+          )
+        );
+      }
+
+      allowed = ["name", "creator"];
+    }
 
     const body = cleanBody(allowed, req);
 
@@ -71,11 +93,16 @@ exports.updateOne = (model, identifier) =>
       update,
       allowed = [];
 
+    // Checking id validity
+    if (!checkMongooseId(req.params.id, next)) return;
+
     // Settings relevant Data
     if (identifier === "blogs") {
-      allowed = ["title", "text"];
-      if (!checkMongooseId(req.params.id, next)) return;
       filter = { _id: req.params.id };
+      allowed = ["title", "text"];
+    } else if (identifier === "collections") {
+      filter = { _id: req.params.id };
+      allowed = ["name"];
     }
 
     // Dropping all unnecessary fields
@@ -100,7 +127,12 @@ exports.updateOne = (model, identifier) =>
 exports.deleteOne = (model, identifier) =>
   catchAsync(async (req, res, next) => {
     let filter;
-    if (identifier === "blogs") filter = { slug: req.params.slug };
+    if (identifier === "blogs") {
+      filter = { slug: req.params.slug };
+    } else if (identifier === "collections") {
+      if (!checkMongooseId(req.params.id, next)) return;
+      filter = { _id: req.params.id };
+    }
     await model.findOneAndDelete(filter);
     res.status(200).json({
       status: "success",
