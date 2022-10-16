@@ -4,6 +4,7 @@ import backdropReducer from "./backdrop";
 import authReducer from "./auth";
 import searchReducer from "./search";
 import cartReducer from "./cart";
+import adminReducer from "./admin";
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     auth: authReducer,
     search: searchReducer,
     cart: cartReducer,
+    admin: adminReducer,
   },
 });
 

@@ -7,11 +7,22 @@ import Chart from "../../components/admin/dashboard/Chart";
 import Stats from "../../components/admin/dashboard/Stats";
 import { dashData } from "../../data";
 import Overview from "../../components/admin/dashboard/Overview";
-import { BsFillBagFill} from "react-icons/bs";
+import { BsFillBagFill } from "react-icons/bs";
 import { AiFillRead, AiFillShop } from "react-icons/ai";
 import { FiSettings } from "react-icons/fi";
 
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
+
 const Dashboard = () => {
+  const router = useRouter();
+  const admin = useSelector((state) => state.admin);
+
+  if (!admin.isLoggedIn) {
+    router.replace({ pathname: "/admin", query: { session: false } });
+    return;
+  }
+
   return (
     <>
       <Head>

@@ -23,7 +23,7 @@
     "react-icons": "^4.4.0",
     "react-redux": "^8.0.2",
     "react-slick": "^0.29.0",
-    "recharts": "^2.1.14",
+    "recharts": "^2.1.12",
     "slick-carousel": "^1.8.1",
     "yup": "^0.32.11"
   },

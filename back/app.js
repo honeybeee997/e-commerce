@@ -1,4 +1,7 @@
 const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv");
+dotenv.config({ path: "./.config.env" });
 
 const adminRoutes = require("./routes/adminRoutes");
 const productRoutes = require("./routes/productRoutes");
@@ -12,6 +15,13 @@ const app = express();
 
 // --- Converts all incoming data to req.body
 app.use(express.json());
+
+// --- CORS
+const corsOptions = {
+  origin: process.env.FRONT_END,
+};
+
+app.use(cors(corsOptions));
 
 // --- Add request time to req.reqTime
 app.use((req, _, next) => {

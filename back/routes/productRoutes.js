@@ -6,9 +6,9 @@ const productController = require("../controllers/productController");
 
 router.get("/:slug", productController.getProduct);
 
-router.use(authenticateToken(admin)); //---> Checking for a valid admin token
-
 router.get("/", productController.getAllProdcuts);
+
+router.use(authenticateToken(admin)); //---> Checking for a valid admin token
 
 router.post(
   "/new",

@@ -1,14 +1,34 @@
 import Head from "next/head";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
-import { TextField, Typography } from "@mui/material";
-import Button from "@mui/material/Button";
+import { useHttp } from "../../hooks/use-http";
+import { backend } from "../../.config.js";
+import LoginForm from "../../components/admin/LoginForm";
+import { useDispatch } from "react-redux";
+import { adminActions } from "../../store/admin";
+import { useRouter } from "next/router";
 
 const Index = () => {
-  const loginSubmitHandler = (values) => {
-    alert(JSON.stringify(values, null, 2));
+  const [error, setError] = useState("");
+  const { sendRequest, isLoading } = useHttp();
+
+  const disptach = useDispatch();
+  const router = useRouter();
+
+  const loginSubmitHandler = async (values) => {
+    setError("");
+    const url = `${backend}/api/admin/login`;
+    const body = JSON.stringify(values);
+    const res = await sendRequest(url, "POST", body);
+    if (res.status === "success") {
+      disptach(
+        adminActions.login({ token: res.data.token, user: res.data.user })
+      );
+      router.replace("/admin/dashboard");
+    } else {
+      return setError(res.message);
+    }
   };
 
   const formik = useFormik({
@@ -21,7 +41,7 @@ const Index = () => {
         .email("Entered email is not Valid")
         .required("Required"),
       password: Yup.string()
-        .max(15, "Password must be 15 characters or less")
+        .min(6, "Password must be at least 6 characters")
         .required("Required"),
     }),
     onSubmit: loginSubmitHandler,
@@ -32,51 +52,7 @@ const Index = () => {
       <Head>
         <title>Admin</title>
       </Head>
-      <main className="h-screen w-screen flex flex-col items-center justify-center">
-        <Typography variant="h4" component="h2">
-          Login
-        </Typography>
-        <form
-          className="flex flex-col items-center gap-4 mt-8 w-4/5 max-w-sm border border-gray-400 rounded-lg p-8"
-          onSubmit={formik.handleSubmit}
-        >
-          <TextField
-            id="email"
-            name="email"
-            label="Email"
-            variant="outlined"
-            className="w-full"
-            {...formik.getFieldProps("email")}
-            error={formik.touched.email && !!formik.errors.email}
-            helperText={
-              formik.touched.email &&
-              !!formik.errors.email &&
-              formik.errors.email
-            }
-          />
-          <TextField
-            id="password"
-            label="Password"
-            variant="outlined"
-            className="w-full"
-            type="password"
-            {...formik.getFieldProps("password")}
-            error={formik.touched.password && !!formik.errors.password}
-            helperText={
-              formik.touched.password &&
-              !!formik.errors.password &&
-              formik.errors.password
-            }
-          />
-          <Button
-            variant="contained"
-            className="btn-override mt-6"
-            type="submit"
-          >
-            Enter
-          </Button>
-        </form>
-      </main>
+      <LoginForm formik={formik} isLoading={isLoading} alert={error} />
     </>
   );
 };

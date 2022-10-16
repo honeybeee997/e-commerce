@@ -12,6 +12,7 @@ const sendToken = (id, admin, res) => {
 
   res.status(202).json({
     status: "success",
+    message: "Logged in successfully",
     data: {
       token,
       user: admin,
@@ -30,6 +31,7 @@ exports.createAdmin = catchAsync(async (req, res, next) => {
   });
   res.status(201).json({
     status: "success",
+    message: "Admin created successfully",
     data: {
       user: newAdmin,
     },
@@ -44,5 +46,6 @@ exports.loginAdmin = catchAsync(async (req, res, next) => {
   if (!admin || !(await admin.isPasswordCorrect(password, admin.password))) {
     return next(new AppError("Invalid email or password", 401));
   }
+
   sendToken(admin._id, admin, res);
 });

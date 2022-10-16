@@ -33,6 +33,14 @@ body {
   margin: 0 auto;
 }
 
+.screen-center {
+  height: calc(100vh - 4rem);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .flag::before {
   display: block;
   content: "";

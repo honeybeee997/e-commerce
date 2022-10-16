@@ -23,7 +23,9 @@ const checkMongooseId = (id, next) => {
 exports.getOne = (model, identifier) =>
   catchAsync(async (req, res, next) => {
     let filter;
+
     if (identifier === "blogs") filter = { slug: req.params.slug };
+
     if (identifier === "collections") {
       if (!checkMongooseId(req.params.id, next)) return;
       filter = { _id: req.params.id };
