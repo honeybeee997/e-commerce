@@ -16,6 +16,7 @@ import styles from "../Admin.module.css";
 import { ModalDialog } from "@mui/joy";
 
 const ListItem = (props) => {
+  console.log(props);
   const [open, setOpen] = useState(false);
   if (props.product) {
     return (

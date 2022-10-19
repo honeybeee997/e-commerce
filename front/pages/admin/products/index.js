@@ -6,8 +6,13 @@ import Layout from "../../../components/admin/Layout";
 import Loader from "../../../components/extras/Loader";
 import { useHttp } from "../../../hooks/use-http";
 import { backend } from "../../../.config.js";
+import NewProduct from "../../../components/admin/new/NewProduct";
+import { Button } from "@mui/material";
 
 const Index = () => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const [data, setData] = useState([]);
   const { sendRequest, isLoading } = useHttp();
 
@@ -36,7 +41,20 @@ const Index = () => {
       <Head>
         <title>Products</title>
       </Head>
-      <Layout>{isLoading ? <Loader /> : content}</Layout>
+      <Layout>
+        {isLoading ? <Loader /> : content}
+        <NewProduct open={open} handleClose={handleClose} />
+        <div className="text-right mt-8">
+          <Button
+            variant="contained"
+            color="success"
+            className="btn-override-green"
+            onClick={handleOpen}
+          >
+            Add Product
+          </Button>
+        </div>
+      </Layout>
     </>
   );
 };

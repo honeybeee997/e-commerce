@@ -19,7 +19,8 @@ const adminSlice = createSlice({
       state.isLoggedIn = true;
       state.token = info.token;
       state.user = info.user;
-      useLocalstorage("get", info);
+
+      useLocalstorage("set", info);
     },
     logout: (state) => {
       state.token = "";

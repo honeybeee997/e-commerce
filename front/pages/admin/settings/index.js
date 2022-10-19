@@ -1,11 +1,14 @@
 import Head from "next/head";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Button } from "@mui/material";
 
 import Layout from "../../../components/admin/Layout";
 import Table from "../../../components/admin/settings/UsersTable";
 import NewForm from "../../../components/admin/settings/NewForm";
+import { useHttp } from "../../../hooks/use-http";
+import { backend } from "../../../.config";
+import Loader from "../../../components/extras/Loader";
 
 function createData(
   name,
@@ -68,17 +71,38 @@ const rows = [
 ];
 
 const Index = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [data, setData] = useState([]);
+  const { sendRequest, isLoading } = useHttp();
+
+  useEffect(() => {
+    (async function () {
+      const res = await sendRequest(`${backend}/api/blogs`);
+      setData(res.data.results);
+    })();
+  }, []);
+
+  let content;
+
+  if (data.length === 0) {
+    content = <p>No Users found. Let's add one</p>;
+  } else {
+    content = (
+      <>
+        <Table rows={data} />
+      </>
+    );
+  }
   return (
     <>
       <Head>
         <title>Settings</title>
       </Head>
       <Layout>
+        {isLoading ? <Loader /> : content}
         <NewForm open={open} handleClose={handleClose} />
-        <Table rows={rows} />
         <div className="text-right mt-8">
           <Button
             variant="contained"
